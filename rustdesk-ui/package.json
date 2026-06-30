@@ -1,0 +1,10 @@
+{
+  "name": "rustdesk-server-ui",
+  "version": "1.0.0",
+  "description": "Custom Web UI for RustDesk Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}

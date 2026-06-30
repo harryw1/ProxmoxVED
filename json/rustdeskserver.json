@@ -1,0 +1,31 @@
+{
+  "name": "RustDesk Server",
+  "slug": "rustdeskserver",
+  "categories": [
+    21
+  ],
+  "date_created": "2026-06-30",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "has_arm": true,
+  "interface_port": 21114,
+  "documentation": "https://rustdesk.com/docs/en/self-host/",
+  "website": "https://rustdesk.com/",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/rustdesk.webp",
+  "description": "RustDesk Server is a self-hosted remote desktop server that includes the hbbs (ID) and hbbr (Relay) servers.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/rustdeskserver.sh",
+      "config_path": "",
+      "resources": {
+        "cpu": 1,
+        "ram": 512,
+        "hdd": 2,
+        "os": "Debian",
+        "version": "13"
+      }
+    }
+  ]
+}

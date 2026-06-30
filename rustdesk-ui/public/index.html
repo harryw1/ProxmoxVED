@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RustDesk Server Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-decorations">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <main class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="logo-wrapper">
+        <svg viewBox="0 0 24 24" class="app-logo">
+          <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+        </svg>
+        <h1>RustDesk Server Configuration</h1>
+      </div>
+      <div class="status-badge" id="overall-status">
+        <span class="pulse"></span>
+        <span class="label">Loading...</span>
+      </div>
+    </header>
+
+    <div class="grid-layout">
+      <!-- Card 1: Service Status -->
+      <section class="card glass-card services-card">
+        <h2>Service Control</h2>
+        <div class="service-item">
+          <div class="service-meta">
+            <span class="service-name">ID Server (hbbs)</span>
+            <span class="service-desc">Handles client ID assignment and rendezvous</span>
+          </div>
+          <span class="badge" id="status-hbbs">Checking...</span>
+        </div>
+        <div class="service-item">
+          <div class="service-meta">
+            <span class="service-name">Relay Server (hbbr)</span>
+            <span class="service-desc">Relays remote session traffic when direct connection fails</span>
+          </div>
+          <span class="badge" id="status-hbbr">Checking...</span>
+        </div>
+      </section>
+
+      <!-- Card 2: Configuration Details -->
+      <section class="card glass-card connection-card">
+        <h2>Client Configuration</h2>
+        <div class="input-group">
+          <label for="id-server-input">ID Server IP / Host</label>
+          <div class="copy-input-wrapper">
+            <input type="text" id="id-server-input" readonly value="Loading...">
+            <button class="copy-btn" onclick="copyValue('id-server-input')" id="btn-copy-id">Copy</button>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="relay-server-input">Relay Server IP / Host</label>
+          <div class="copy-input-wrapper">
+            <input type="text" id="relay-server-input" readonly value="Loading...">
+            <button class="copy-btn" onclick="copyValue('relay-server-input')" id="btn-copy-relay">Copy</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card 3: Security Public Key -->
+      <section class="card glass-card key-card full-width-mobile">
+        <h2>Security Key (Public Key)</h2>
+        <p class="section-desc">Paste this key in your client settings to encrypt connections.</p>
+        <div class="textarea-group">
+          <textarea id="public-key-textarea" readonly placeholder="Key not generated yet..."></textarea>
+          <button class="action-btn copy-btn-large" onclick="copyValue('public-key-textarea')" id="btn-copy-key">Copy Public Key</button>
+        </div>
+      </section>
+
+      <!-- Card 4: Quick Setup String -->
+      <section class="card glass-card config-string-card">
+        <h2>Client Config String</h2>
+        <p class="section-desc">Copy this string and import it directly into your client.</p>
+        <div class="textarea-group">
+          <textarea id="config-string-textarea" readonly placeholder="Generating configuration string..."></textarea>
+          <button class="action-btn copy-btn-large" onclick="copyValue('config-string-textarea')" id="btn-copy-config">Copy Config String</button>
+        </div>
+      </section>
+
+      <!-- Card 5: System Metrics -->
+      <section class="card glass-card metrics-card">
+        <h2>Container Metrics</h2>
+        <div class="metric-item">
+          <div class="metric-info">
+            <span>CPU Load</span>
+            <span id="metric-cpu">0.00</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="fill-cpu" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-info">
+            <span>Memory Usage</span>
+            <span id="metric-ram">0 / 0 MB</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="fill-ram" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-info">
+            <span>Disk Space</span>
+            <span id="metric-disk">0 / 0 GB</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="fill-disk" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="uptime-wrapper">
+          <span class="uptime-label">Uptime:</span>
+          <span id="metric-uptime">Loading...</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer-note">
+    <p>RustDesk Server Dashboard &bull; Self-Hosted &bull; Made with &hearts;</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
